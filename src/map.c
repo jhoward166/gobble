@@ -14,28 +14,28 @@ static bool s_outline_mode;
 static const GPathInfo BOLT_PATH_INFO = {
   22,
   (GPoint []) {
-    {0, 70},
-    {-17, 57},
-    {-30, 40},
-    {-37, 20},
-    {-40, 0},  //5
-    {-35, -30},
-    {-33, -35},
-    {-30, -40},
-    {-25, -50},
-    {-20, -54}, //10
-    {0, -60},
-    {20, -57},//15
-    {30, -50},
-    {40, -40},
-    {42, -25},
-    {40, -10},
-    {33, 0},
-    {10, 10},
-    {12, 30}, //20
-    {20, 55},
-    {17, 65},
-    {10, 70}
+    {60, 130},
+    {43, 117},
+    {30, 100},
+    {23, 80},
+    {20, 60},  
+    {25, 30},
+    {27, 25},
+    {30, 20},
+    {35, 10},
+    {40, 6}, 
+    {60, 0},
+    {80, 3},
+    {90, 10},
+    {100, 20},
+    {102, 35},
+    {100, 50},
+    {93, 60},
+    {70, 70},
+    {72, 90}, 
+    {80, 115},
+    {77, 125},
+    {70, 130}
   }
 };
 
@@ -66,9 +66,10 @@ void window_load(Window *window){
   layer_add_child(window_layer, s_path_layer);
 
   // Move all paths to the center of the screen
-  for (int i = 0; i < NUM_PATHS; i++) {
+  /*for (int i = 0; i < NUM_PATHS; i++) {
     gpath_move_to(s_path_array[i], GPoint(bounds.size.w/2, bounds.size.h/2));
   }
+  */
 }
 
 void window_unload(Window *window){
