@@ -138,7 +138,10 @@ int pythagCeiling(int deltaX, int deltaY){
   int i = 1;
   int cSqrd = ((deltaX*deltaX)+(deltaY*deltaY));
   while((i*i) < cSqrd){
-      i++;
+    if(i > cSqrd || i<1){
+      return -1;
+    }
+    i++;
   }
   return i;
 }
