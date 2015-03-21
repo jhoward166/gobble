@@ -8,8 +8,15 @@ static Layer *s_path_layer;
 
 static GPath *s_path_array[NUM_PATHS];
 static GPath *s_current_path;
+static GPath *hole_path;
+static GPath *green_path;
+static GPath *sand1_path;
+static GPath *sand2_path;
+static GPath *sand3_path;
+static GPath *teebox_path;
 
 static bool s_outline_mode;
+
 
 static const GPathInfo BOLT_PATH_INFO = {
   22,
@@ -39,6 +46,95 @@ static const GPathInfo BOLT_PATH_INFO = {
   }
 };
 
+static const GPathInfo GREEN = {
+  12,
+  (GPoint []) {
+    {80, 15},
+    {76, 17},
+    {72, 21},
+    {70, 25},
+    {72, 29},
+    {76, 33},
+    {80, 35},
+    {84, 33},
+    {88, 31},
+    {90, 25},
+    {88, 21},
+    {84, 17}
+    
+  }
+};
+
+static const GPathInfo HOLE = {
+  4,
+  (GPoint []) {
+    {80, 23},
+    {85, 23},
+    {85, 20},
+    {80, 20}
+  }
+};
+
+static const GPathInfo SAND1 = {
+  10,
+  (GPoint []) {
+    {67,20},
+    {83, 15},
+    
+    {85, 14},
+    {85, 11},
+    
+    {83, 10},
+      
+    {76, 6},
+    {74, 6},
+      
+    {67,10}, 
+    
+    {65, 11},
+    {65, 14}
+  }
+};
+static const GPathInfo SAND2 = {
+  10,
+  (GPoint []) {
+    {67,65},
+    {93, 55},
+    {95, 54},
+    {95, 51},
+    {93, 50},
+    {81, 44},
+    {79, 44},
+    {67,50}, 
+    {65, 51},
+    {65, 64}
+  }
+};
+  
+  static const GPathInfo SAND3 = {
+  8,
+  (GPoint []) {
+    {32,50},
+    {30,52},
+    {30,78},
+    {32,80},
+    {38,80},
+    {40,78},
+    {40,52},
+    {38,50} 
+  }
+};
+
+static const GPathInfo TEEBOX = {
+  4,
+  (GPoint []) {
+    {60, 125},
+    {60, 120},
+    {70, 120},
+    {70, 125} 
+  }
+};
+
 static void path_layer_update_callback(Layer *layer, GContext *ctx) {
   // You can rotate the path before rendering
   //gpath_rotate_to(s_current_path, (TRIG_MAX_ANGLE / 360) * s_path_angle);
@@ -52,8 +148,20 @@ static void path_layer_update_callback(Layer *layer, GContext *ctx) {
     gpath_draw_outline(ctx, s_current_path);
   } else {
     // draw filled uses the fill color
-    graphics_context_set_fill_color(ctx, GColorLimerick);
+    graphics_context_set_fill_color(ctx, GColorJaegerGreen);
     gpath_draw_filled(ctx, s_current_path);
+    graphics_context_set_fill_color(ctx, GColorDarkGreen);
+    gpath_draw_filled(ctx, green_path);
+    graphics_context_set_fill_color(ctx, GColorWhite);
+    gpath_draw_filled(ctx, hole_path);
+    graphics_context_set_fill_color(ctx, GColorChromeYellow);
+    gpath_draw_filled(ctx, sand1_path);
+    graphics_context_set_fill_color(ctx, GColorChromeYellow);
+    gpath_draw_filled(ctx, sand2_path);
+    graphics_context_set_fill_color(ctx, GColorChromeYellow);
+    gpath_draw_filled(ctx, sand3_path);
+    graphics_context_set_fill_color(ctx, GColorDarkGray);
+    gpath_draw_filled(ctx, teebox_path);
   }
 }
 
@@ -78,6 +186,12 @@ void window_unload(Window *window){
 
 void handle_init(void){
   s_current_path = gpath_create(&BOLT_PATH_INFO);
+  green_path = gpath_create(&GREEN);
+  hole_path = gpath_create(&HOLE);
+  sand1_path = gpath_create(&SAND1);
+  sand2_path = gpath_create(&SAND2);
+  sand3_path = gpath_create(&SAND3);
+  teebox_path = gpath_create(&TEEBOX);
   
   s_path_array[0] = s_current_path;
   
@@ -94,6 +208,12 @@ void handle_deinit(void){
   window_destroy(s_main_window);
 
   gpath_destroy(s_current_path);
+  gpath_destroy(green_path);
+  gpath_destroy(hole_path);
+  gpath_destroy(sand1_path);
+  gpath_destroy(sand2_path);
+  gpath_destroy(sand3_path);
+  gpath_destroy(teebox_path);
 }
 
 int main(void){
