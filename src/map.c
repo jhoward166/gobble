@@ -17,7 +17,6 @@ static GPath *teebox_path;
 
 static bool s_outline_mode;
 
-
 static const GPathInfo BOLT_PATH_INFO = {
   22,
   (GPoint []) {
@@ -134,6 +133,15 @@ static const GPathInfo TEEBOX = {
     {70, 125} 
   }
 };
+
+int pythagCeiling(int deltaX, int deltaY){
+  int i = 1;
+  int cSqrd = ((deltaX*deltaX)+(deltaY*deltaY));
+  while((i*i) < cSqrd){
+      i++;
+  }
+  return i;
+}
 
 static void path_layer_update_callback(Layer *layer, GContext *ctx) {
   // You can rotate the path before rendering
