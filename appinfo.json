@@ -1,0 +1,23 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "jhoward166@gmail.com",
+    "longName": "Gobble",
+    "projectType": "native",
+    "resources": {
+        "media": []
+    },
+    "sdkVersion": "3",
+    "shortName": "Gobble",
+    "targetPlatforms": [
+        "basalt"
+    ],
+    "uuid": "0427ab71-50b9-489c-81a3-beaa9b690459",
+    "versionCode": 1,
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": false
+    }
+}
