@@ -181,6 +181,11 @@ static void path_layer_update_callback(Layer *layer, GContext *ctx) {
   }
 }
 
+/*void click_config_provider() {
+  window_single_click_subscribe(BUTTON_ID_DOWN, (ClickHandler) void);
+  window_single_click_subscribe(BUTTON_ID_UP, (ClickHandler) void);
+}*/
+
 void window_load(Window *window){
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_frame(window_layer);
@@ -192,6 +197,7 @@ void window_load(Window *window){
   counterClockwiseBitmap = gbitmap_create_with_resource(RESOURCE_ID_COUNTER_CLOCKWISE);
   clockwiseBitmap = gbitmap_create_with_resource(RESOURCE_ID_CLOCKWISE);
   checkBitmap = gbitmap_create_with_resource(RESOURCE_ID_CHECK_MARK);
+  //action_bar_layer_set_click_config_provider(action, click_config_provider());
   action_bar_layer_set_icon(action_bar, BUTTON_ID_UP, counterClockwiseBitmap);
   action_bar_layer_set_icon(action_bar, BUTTON_ID_SELECT , checkBitmap);
   action_bar_layer_set_icon(action_bar, BUTTON_ID_DOWN, clockwiseBitmap);
