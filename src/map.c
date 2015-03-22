@@ -19,6 +19,15 @@ static GPath *sand2_path;
 static GPath *sand3_path;
 static GPath *teebox_path;
 
+int currentX;
+int currentY;
+int nextX;
+int nextY;
+int holeMinX = 80;
+int holeMaxX = 85;
+int holeMinY = 20;
+int holeMaxY = 23;
+
 static bool s_outline_mode;
 
 static const GPathInfo BOLT_PATH_INFO = {
@@ -137,6 +146,30 @@ static const GPathInfo TEEBOX = {
     {70, 125} 
   }
 };
+
+bool victoryCondition(){
+  if(
+    (nextX <= holeMaxX && nextX >= holeMinX) 
+    &&
+    (nextY <= holeMaxY && nextY >= holeMinY)
+  ){
+    return true;
+  }else if(
+    (
+      (currentX <= holeMinX && nextX >= holeMaxX)
+      ||
+      (currentX >= holeMaxX && nextX <= holeMinX)
+    )&&(
+      (currentY <= holeMinY && nextY >= holeMaxY)
+      ||
+      (currentY >= holeMaxY && nextY <= holeMaxY)
+    )
+  ){
+    return true;
+  }else{
+    return false;
+  }
+}
 
 int pythagCeiling(int deltaX, int deltaY){
   int i = 1;
