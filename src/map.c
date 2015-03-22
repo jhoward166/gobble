@@ -185,7 +185,7 @@ void window_load(Window *window){
   s_path_layer = layer_create(bounds);
   layer_set_update_proc(s_path_layer, path_layer_update_callback);
   layer_add_child(window_layer, s_path_layer);
-  layer_add_child(window_get_root_layer(window), (Layer *)bitmap_layer);
+  layer_add_child(window_get_root_layer(window), bitmap_layer_get_layer((BitmapLayer *)bitmap_layer));
 
   // Move all paths to the center of the screen
   /*for (int i = 0; i < NUM_PATHS; i++) {
