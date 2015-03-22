@@ -9,6 +9,21 @@
     "resources": {
         "media": [
             {
+                "file": "images/newCheck.png",
+                "name": "CHECK_MARK",
+                "type": "png"
+            },
+            {
+                "file": "images/newTurnRight.png",
+                "name": "CLOCKWISE",
+                "type": "png"
+            },
+            {
+                "file": "images/newTurnLeft.png",
+                "name": "COUNTER_CLOCKWISE",
+                "type": "png"
+            },
+            {
                 "file": "images/5iron.png",
                 "name": "IRON_FIVE",
                 "type": "png"

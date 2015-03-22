@@ -5,8 +5,11 @@ Window *window;
   
 static Window *s_main_window;
 static Layer *s_path_layer;
-static GBitmap *bitMap;
-static RotBitmapLayer *bitmap_layer;
+ActionBarLayer *action_bar;
+static GBitmap *checkBitmap;
+static GBitmap *clockwiseBitmap;
+static GBitmap *counterClockwiseBitmap;
+//static RotBitmapLayer *bitmap_layer;
 static GPath *s_path_array[NUM_PATHS];
 static GPath *s_current_path;
 static GPath *hole_path;
@@ -174,18 +177,26 @@ static void path_layer_update_callback(Layer *layer, GContext *ctx) {
     gpath_draw_filled(ctx, sand3_path);
     graphics_context_set_fill_color(ctx, GColorDarkGray);
     gpath_draw_filled(ctx, teebox_path);
-    rot_bitmap_set_compositing_mode(bitmap_layer, GCompOpSet);
+    //rot_bitmap_set_compositing_mode(bitmap_layer, GCompOpSet);
   }
 }
 
 void window_load(Window *window){
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_frame(window_layer);
-
+  action_bar = action_bar_layer_create();
   s_path_layer = layer_create(bounds);
   layer_set_update_proc(s_path_layer, path_layer_update_callback);
   layer_add_child(window_layer, s_path_layer);
-  layer_add_child(window_get_root_layer(window), bitmap_layer_get_layer((BitmapLayer *)bitmap_layer));
+  action_bar_layer_set_background_color(action_bar, GColorWhite);
+  counterClockwiseBitmap = gbitmap_create_with_resource(RESOURCE_ID_COUNTER_CLOCKWISE);
+  clockwiseBitmap = gbitmap_create_with_resource(RESOURCE_ID_CLOCKWISE);
+  checkBitmap = gbitmap_create_with_resource(RESOURCE_ID_CHECK_MARK);
+  action_bar_layer_set_icon(action_bar, BUTTON_ID_UP, counterClockwiseBitmap);
+  action_bar_layer_set_icon(action_bar, BUTTON_ID_SELECT , checkBitmap);
+  action_bar_layer_set_icon(action_bar, BUTTON_ID_DOWN, clockwiseBitmap);
+  action_bar_layer_add_to_window(action_bar, window);
+  //layer_add_child(window_get_root_layer(window), bitmap_layer_get_layer((BitmapLayer *)bitmap_layer));
 
   // Move all paths to the center of the screen
   /*for (int i = 0; i < NUM_PATHS; i++) {
@@ -196,6 +207,7 @@ void window_load(Window *window){
 
 void window_unload(Window *window){
   //rot_bitmap_layer_destroy(bitmap_layer);
+  action_bar_layer_destroy(action_bar);
   layer_destroy(s_path_layer);
 }
 
@@ -208,9 +220,9 @@ void handle_init(void){
   sand3_path = gpath_create(&SAND3);
   teebox_path = gpath_create(&TEEBOX);
   
-  bitMap = gbitmap_create_with_resource(RESOURCE_ID_IRON_FIVE);
+  //bitMap = gbitmap_create_with_resource(RESOURCE_ID_IRON_FIVE);
   //bitmap_layer = bitmap_layer_create(GRect(0, 0, 144, 156));
-  rot_bitmap_layer_create(bitMap);
+  //rot_bitmap_layer_create(bitMap);
   //bitmap_layer_set_background_color(bitmap_layer, GColorClear);
   
   
@@ -237,7 +249,7 @@ void handle_deinit(void){
   gpath_destroy(sand3_path);
   gpath_destroy(teebox_path);
   
-  rot_bitmap_layer_destroy(bitmap_layer);
+  //rot_bitmap_layer_destroy(bitmap_layer);
  
 }
 
