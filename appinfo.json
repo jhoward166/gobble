@@ -7,7 +7,18 @@
     "longName": "Gobble",
     "projectType": "native",
     "resources": {
-        "media": []
+        "media": [
+            {
+                "file": "images/5iron.png",
+                "name": "IRON_FIVE",
+                "type": "png"
+            },
+            {
+                "file": "images/3Iron.png",
+                "name": "IRON_THREE",
+                "type": "png"
+            }
+        ]
     },
     "sdkVersion": "3",
     "shortName": "Gobble",
